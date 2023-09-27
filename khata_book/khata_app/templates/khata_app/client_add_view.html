@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Customer Entry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            margin-left: 50%;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Customer Entry - Debit Book</h1>
+         {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+        <li>{% if message.tags %}
+        {% endif %}
+        {{ message }}
+        </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+
+        <!-- Client entry form -->
+        <div class="form-container">
+            <form method="post">{% csrf_token %}
+                <table>
+                    <tr>
+                        <th>Client Name:</th>
+                        <td><input type="text" id="clientName" name="clientName" value="{{client}}" required></td>
+                        <th>Goods:</th>
+                        <td><input type="text" id="goods" name="goods" required></td>
+                    </tr>
+                    <tr>
+                        <th>Quantity:</th>
+                        <td><input type="number" id="quantity" name="quantity" required></td>
+                        <th>Size:</th>
+                        <td><input type="text" id="size" name="size" required></td>
+                    </tr>
+                    <tr>
+                        <th>Price Per Piece:</th>
+                        <td><input type="number" id="pricePerPiece" name="pricePerPiece" step="0.01" required></td>
+                        <th>Due date:</th>
+                        <td><input type="date" id="due-date" name="due-date"></td>
+                    </tr>
+                </table>
+                <button type="submit">Add Client Entry</button>
+            </form>
+        </div>
+
+        <!-- Link to the list view -->
+        <div class="form-container">
+            <a href="/client-list">Go Home</a>
+        </div>
+    </div>
+</body>
+</html>

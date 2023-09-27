@@ -1,0 +1,34 @@
+{% extends 'khata_app/base.html' %}
+
+{% block list %}
+{% if data %}
+<table>
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Debit Amount</th>
+                <th>Created On</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        {% for client, amount in data.items %}
+        <tbody>
+            <tr>
+                <td><a href="/client-khata/{{ client.client_name }}">
+                    {{ client.client_name }}</a>
+                </td>
+                <td>{{ amount }}₹</td>
+                <td>{{ client.created_on }}</td>
+                <td>{{ client.due_date }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+
+    </table>
+{% else %}
+<div style="text-align:center">
+<h3>Nothing found here....</h3>
+</div>
+
+{% endif %}
+{% endblock %}
